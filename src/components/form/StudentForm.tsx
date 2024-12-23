@@ -4,7 +4,6 @@ const StudentForm = () => {
   return (
     <form className="flex flex-col items-center justify-center h-full">
       <div className="w-full max-w-md space-y-4">
-
         <input
           type="text"
           id="studentName"
@@ -21,10 +20,7 @@ const StudentForm = () => {
           placeholder="Class Name"
         />
 
-        <button
-          type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded mt-4"
-        >
+        <button type="submit" className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded mt-4">
           Submit
         </button>
       </div>
