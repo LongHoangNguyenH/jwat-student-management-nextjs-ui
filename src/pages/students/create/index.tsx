@@ -1,49 +1,69 @@
-import UnAuthorization from '@/pages/unauthorize';
 import { useRouter } from 'next/router';
-import React from 'react';
-
-const StudentFormPage = () => {
+import { useCallback, useState } from 'react';
+export default function Page() {
+  // return <StudentCreationForm />;
+  const [studentName, setStudentName] = useState('');
+  const [className, setClassName] = useState('');
   const router = useRouter();
-  const { role } = router.query;
+
+  const submitStudentCreationForm = useCallback(async () => {
+    const res = await fetch('http://localhost:3000/students', {
+      method: 'POST',
+      headers: [
+        ['Authorization', 'Bearer admin'],
+        ['Content-Type', 'application/json'],
+      ],
+      body: JSON.stringify({
+        studentName,
+        className,
+      }),
+    });
+
+    const resContent = await res.json();
+    if (res.ok) {
+      router.replace('/students/view');
+      return;
+    }
+
+    alert(resContent.devMessage);
+  }, [studentName, className]);
+
   return (
-    <>
-      {role === 'admin' || role === 'teacher' ? (
-        <div className="bg-gray-500 flex flex-col justify-center items-center min-h-screen">
-          <h1 className="mb-5 text-xl">Fill Student Fields</h1>
-          <form className="flex flex-col items-center justify-center h-full">
-            <div className="w-full max-w-md space-y-4">
-              <input
-                type="text"
-                id="studentName"
-                name="studentName"
-                className="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:outline-none focus:ring"
-                placeholder="Student Name"
-              />
+    <div className="flex flex-col items-center justify-between h-full w-full">
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          submitStudentCreationForm();
+        }}
+      >
+        <label htmlFor="form--student-name">Student name</label>
+        <input
+          id="form--student-name"
+          className="block border-2 border-black rounded px-2"
+          name="studentName"
+          type="text"
+          value={studentName}
+          onChange={e => setStudentName(e.target.value)}
+        />
 
-              <input
-                type="text"
-                id="className"
-                name="className"
-                className="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:outline-none focus:ring"
-                placeholder="Class Name"
-              />
+        <label htmlFor="form--class-name">Class name</label>
+        <input
+          id="form--class-name"
+          className="block border-2 border-black rounded px-2 mb-2"
+          name="className"
+          type="text"
+          value={className}
+          onChange={e => setClassName(e.target.value)}
+        />
 
-              <button
-                type="submit"
-                className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded mt-4"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
+        <div className="items-center flex justify-center">
+          <input
+            type="submit"
+            value="Create Student"
+            className="flex justify bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-900"
+          />
         </div>
-      ) : (
-        <div>
-          <UnAuthorization />
-        </div>
-      )}
-    </>
+      </form>
+    </div>
   );
-};
-
-export default StudentFormPage;
+}

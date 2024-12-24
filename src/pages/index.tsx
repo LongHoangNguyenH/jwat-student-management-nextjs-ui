@@ -23,7 +23,7 @@ export default function Page() {
             </button>
 
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold w-[150px] h-10 py-2 px-4 mt-10 ml-10 rounded">
-              <Link href={'/students/view'}>View Classes</Link>
+              <Link href={'/students/view'}>View Student</Link>
             </button>
           </div>
         </div>

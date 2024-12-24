@@ -1,40 +1,58 @@
-import UnAuthorization from '@/pages/unauthorize';
 import { useRouter } from 'next/router';
-import React from 'react';
+import { useCallback, useState } from 'react';
 
-const ClassFormPage = () => {
+export default function Page() {
+  const [className, setClassName] = useState('');
   const router = useRouter();
-  const { role } = router.query;
-  return (
-    <>
-      {role === 'admin' || role === 'teacher' ? (
-        <div className="flex h-[60vh] flex-col items-center justify-around text-black">
-          <h1 className="text-4xl font-bold">Create Class</h1>
-          <form className="flex flex-col items-center justify-center h-full">
-            <div className="w-full max-w-md">
-              <input
-                type="text"
-                id="className"
-                name="className"
-                className="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:outline-none focus:ring"
-                placeholder="Class name"
-              />
-              <button
-                type="submit"
-                className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded mt-4"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
-        </div>
-      ) : (
-        <div>
-          <UnAuthorization />
-        </div>
-      )}
-    </>
-  );
-};
 
-export default ClassFormPage;
+  const submitClass = useCallback(async () => {
+    const res = await fetch('http://localhost:3000/classes', {
+      method: 'POST',
+      headers: [
+        ['Authorization', 'Bearer admin'],
+        ['Content-Type', 'application/json'],
+      ],
+      body: JSON.stringify({
+        className,
+      }),
+    });
+    console.log(res);
+    const resContent = await res.json();
+    console.log(resContent);
+    if (res.ok) {
+      router.replace('/classes/view');
+      return;
+    }
+
+    alert(resContent.devMessage);
+  }, [className]);
+
+  return (
+    <div className='max-h-screen'>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          submitClass();
+        }}
+      >
+        <div className="flex flex-col justify-center items-center mt-10">
+          <label htmlFor="form--class-name">Fill Class name</label>
+          <input
+            id="form--class-name"
+            className="flex justify-center border-2 border-gray-600 rounded-sm px-2 py-1 mb-2 w-[300px]"
+            name="className"
+            type="text"
+            value={className}
+            onChange={e => setClassName(e.target.value)}
+          />
+
+          <input
+            type="submit"
+            value="Create Class"
+            className="flex justify-center w-[300px] bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-900"
+          />
+        </div>
+      </form>
+    </div>
+  );
+}

@@ -1,5 +1,5 @@
-export interface studentType {
-    studentId: number;
-    studentName: string;
-    className: string;
+export interface Student {
+  studentId: number;
+  studentName: string;
+  className: string;
 }
