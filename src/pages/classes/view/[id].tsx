@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
 
 export default function Page({ classes }: PageProps) {
   return (
-    <section className='flex flex-col justify-center items-center w-[300px]'>
+    <section className="flex flex-col justify-center items-center w-[300px]">
       <h1>Class Detail</h1>
       <table className="table-auto border border-gray-200">
         <thead>

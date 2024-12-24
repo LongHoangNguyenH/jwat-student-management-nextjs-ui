@@ -13,16 +13,16 @@ export const getServerSideProps = (async () => {
 
 export default function ClassPage({ classes }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <div className='items-center'>
+    <div className="items-center">
       <div className="flex flex-row items-center justify-center">
         <div className="flex justify-center mb-2 mt-2">
-          <Link href={'/classes/create'} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-900">
-            Create New Class
+          <Link href={'/classes/create'} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-blue-900">
+            Create Class
           </Link>
         </div>
         <div className="flex justify-start mb-2 mt-2 ml-5">
-          <Link href={'/'} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-900">
-            Back to Main Page
+          <Link href={'/'} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-blue-900">
+            Home
           </Link>
         </div>
       </div>
@@ -45,7 +45,11 @@ export default function ClassPage({ classes }: InferGetServerSidePropsType<typeo
                 <tr key={`${index}`}>
                   <td className="px-6 py-4 w-full">{s.className}</td>
                   <td className="px-6 py-4 w-full">
-                    <span><Link href={`/classes/view/${s.classId}`} className="hover:bg-green-400 flex justify-center">Detail</Link></span>
+                    <span>
+                      <Link href={`/classes/view/${s.classId}`} className="hover:bg-green-400 flex justify-center">
+                        Detail
+                      </Link>
+                    </span>
                   </td>
                 </tr>
               </>

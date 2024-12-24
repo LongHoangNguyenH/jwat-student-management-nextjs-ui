@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 
@@ -28,7 +29,7 @@ export default function Page() {
   }, [className]);
 
   return (
-    <div className='max-h-screen'>
+    <div className="max-h-screen">
       <form
         onSubmit={e => {
           e.preventDefault();
@@ -39,7 +40,7 @@ export default function Page() {
           <label htmlFor="form--class-name">Fill Class name</label>
           <input
             id="form--class-name"
-            className="flex justify-center border-2 border-gray-600 rounded-sm px-2 py-1 mb-2 w-[300px]"
+            className="flex justify-center border border-gray-600 rounded-sm px-2 py-1 mb-2 w-[300px]"
             name="className"
             type="text"
             value={className}
@@ -49,8 +50,15 @@ export default function Page() {
           <input
             type="submit"
             value="Create Class"
-            className="flex justify-center w-[300px] bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-900"
+            className="flex justify-center w-[300px] bg-gray-500 text-white px-4 py-2 rounded hover:bg-blue-900"
           />
+
+          <Link
+            href={'/classes/view'}
+            className="flex justify-center w-[300px] bg-gray-500 text-white px-4 py-2 rounded hover:bg-blue-900 mt-5"
+          >
+            View Class
+          </Link>
         </div>
       </form>
     </div>

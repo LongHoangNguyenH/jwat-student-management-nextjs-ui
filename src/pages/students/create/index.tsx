@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 export default function Page() {
@@ -39,7 +40,7 @@ export default function Page() {
         <label htmlFor="form--student-name">Student name</label>
         <input
           id="form--student-name"
-          className="block border-2 border-black rounded px-2"
+          className="flex justify-center border border-gray-600 rounded-sm px-2 py-1 mb-2 w-[300px]"
           name="studentName"
           type="text"
           value={studentName}
@@ -49,19 +50,26 @@ export default function Page() {
         <label htmlFor="form--class-name">Class name</label>
         <input
           id="form--class-name"
-          className="block border-2 border-black rounded px-2 mb-2"
+          className="flex justify-center border border-gray-600 rounded-sm px-2 py-1 mb-2 w-[300px]"
           name="className"
           type="text"
           value={className}
           onChange={e => setClassName(e.target.value)}
         />
 
-        <div className="items-center flex justify-center">
+        <div className="items-center flex justify-center items-center">
           <input
             type="submit"
             value="Create Student"
-            className="flex justify bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-900"
+            className="flex justify bg-gray-500 text-white px-4 py-2 rounded hover:bg-blue-900"
           />
+
+          <Link
+            href={'/students/view'}
+            className="flex justify ml-5 bg-gray-500 text-white px-4 py-2 rounded hover:bg-blue-900"
+          >
+            View Students
+          </Link>
         </div>
       </form>
     </div>

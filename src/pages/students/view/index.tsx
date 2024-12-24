@@ -55,19 +55,19 @@ export default function Page({ students }: InferGetServerSidePropsType<typeof ge
   }, [studentSearchByClassname]);
 
   return (
-    <section className='flex items-center flex-col'>
+    <section className="flex items-center flex-col">
       <h1 className="text-3xl font-bold items-center flex justify-center">All students</h1>
 
       <div className="flex flex-row">
         <div className="flex justify-start">
-          <Link href={'/students/create'} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-900">
-            Create New Student
+          <Link href={'/students/create'} className="bg-gray-500 text-white px-4 py-5 rounded hover:bg-blue-900">
+            Create Student
           </Link>
         </div>
 
         <div className="flex justify-start mt-2 ml-5">
-          <Link href={'/'} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-900">
-            Back to Main Page
+          <Link href={'/'} className="bg-gray-500 text-white px-4 py-3 rounded hover:bg-blue-900">
+            Home
           </Link>
         </div>
 
@@ -79,10 +79,10 @@ export default function Page({ students }: InferGetServerSidePropsType<typeof ge
             }}
             className="ml-5"
           >
-            <label htmlFor="form--search-by-name">Search</label>
+            <label htmlFor="search-by-name">Search by name</label>
             <input
-              id="form--search-by-name"
-              className="block border-2 border-black rounded px-2"
+              id="search-by-name"
+              className="flex justify-center border border-gray-600 rounded-sm px-2 py-1 mb-2"
               type="text"
               value={studentSearchByName}
               onChange={e => setStudentSearchByName(e.target.value)}
@@ -99,7 +99,7 @@ export default function Page({ students }: InferGetServerSidePropsType<typeof ge
             <label htmlFor="form--search-by-class">Search by class name</label>
             <input
               id="form--search-by-class"
-              className="block border-2 border-black rounded px-2"
+              className="flex justify-center border border-gray-600 rounded-sm px-2 py-1 mb-2"
               type="text"
               value={studentSearchByClassname}
               onChange={e => setstudentSearchByClassname(e.target.value)}
@@ -108,7 +108,7 @@ export default function Page({ students }: InferGetServerSidePropsType<typeof ge
         </div>
       </div>
 
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center mt-5">
         <table className="table-auto border border-gray-200">
           <thead>
             <tr>

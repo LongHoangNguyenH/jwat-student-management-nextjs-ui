@@ -1,7 +1,5 @@
 import type { Config } from 'tailwindcss';
 
-import { fontFamily } from 'tailwindcss/defaultTheme';
-
 export default {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -36,14 +34,6 @@ export default {
           600: '#76828D',
           700: '#ABB8C4',
         },
-      },
-      fontFamily: {
-        sans: ['var(--font-sans)', ...fontFamily.sans],
-      },
-      backgroundImage: {
-        // appointments: "url('/assets/images/appointments-bg.png')",
-        // pending: "url('/assets/images/pending-bg.png')",
-        // cancelled: "url('/assets/images/cancelled-bg.png')",
       },
     },
   },
